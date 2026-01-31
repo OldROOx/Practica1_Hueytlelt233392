@@ -6,13 +6,13 @@ plugins {
 
 android {
     namespace = "com.gael.gael_practica1"
-    compileSdk = 34
+    compileSdk = 36
 
 
     defaultConfig {
         applicationId = "com.gael.gael_practica1"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -72,6 +72,10 @@ dependencies {
     implementation(libs.retrofit.main)
     implementation(libs.retrofit.converter.gson)
     //coool
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
+
+    // Para el error de 'coil' y 'AsyncImage' en CountryCard
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
     // Opcional: Si necesitas usar Gson por separado en tu código
     implementation("com.google.code.gson:gson:2.11.0")
