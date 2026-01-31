@@ -4,22 +4,24 @@ import com.gael.gael_practica1.features.countries.data.datasources.remote.model.
 import com.gael.gael_practica1.features.countries.domain.entities.Country
 
 fun CountryDto.toDomain(): Country {
-    // Extraemos la primera moneda e idioma disponibles de los mapas dinámicos
+    // Extraemos de forma segura el primer valor de los mapas
     val firstCurrency = this.currencies?.values?.firstOrNull()
     val firstLanguage = this.languages?.values?.firstOrNull()
 
     return Country(
         commonName = this.name.common,
         officialName = this.name.official,
-        // Si la lista de capitales está vacía, ponemos "N/A"
-        capital = this.capital?.firstOrNull() ?: "N/A",
+        // Si no hay capital, ponemos un texto amigable
+        capital = this.capital?.firstOrNull() ?: "Sin capital",
         region = this.region,
-        // Unimos el root (+3) con el primer sufijo (76) para tener +376
-        phoneCode = "${this.idd?.root ?: ""}${this.idd?.suffixes?.firstOrNull() ?: ""}",
+        // Unimos el código de teléfono manejando nulos de IDD
+        phoneCode = if (this.idd != null) {
+            "${this.idd.root ?: ""}${this.idd.suffixes?.firstOrNull() ?: ""}"
+        } else "N/A",
         currencyName = firstCurrency?.name ?: "N/A",
         currencySymbol = firstCurrency?.symbol ?: "",
         language = firstLanguage ?: "N/A",
-        // Generamos la URL de la bandera usando el cca2 que agregamos al DTO
+        // Usamos cca2 para la bandera
         flagUrl = "https://flagsapi.com/${this.cca2}/shiny/64.png"
     )
 }

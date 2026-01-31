@@ -59,8 +59,7 @@ fun CountriesApiDataPreview() {
             region = "Europe",
             idd = IddDto(root = "+3", suffixes = listOf("76")),
             currencies = null,
-            languages = null,
-            demonyms = null
+            languages = null
         )
 
         // Usamos tu función de extensión toDomain para transformar el DTO

@@ -3,14 +3,13 @@ package com.gael.gael_practica1.features.countries.data.datasources.remote.model
 import com.google.gson.annotations.SerializedName
 
 data class CountryDto(
-    @SerializedName("name") val name: NameDto,
-    @SerializedName("capital") val capital: List<String>?,
-    @SerializedName("currencies") val currencies: Map<String, CurrencyDto>?,
-    @SerializedName("region") val region: String,
-    @SerializedName("idd") val idd: IddDto?,
-    @SerializedName("languages") val languages: Map<String, String>?,
-    @SerializedName("demonyms") val demonyms: Map<String, Map<String, DemonymDto>>?,
-    @SerializedName("cca2") val cca2: String // <--- NUEVO: Código de 2 letras (ej: "BE", "MX")
+    val name: NameDto,
+    val cca2: String,
+    val capital: List<String>?, // Agregado el ?
+    val region: String,
+    val idd: IddDto?, // Agregado el ?
+    val currencies: Map<String, CurrencyDto>?, // Agregado el ?
+    val languages: Map<String, String>? // Agregado el ?
 )
 
 data class NameDto(
