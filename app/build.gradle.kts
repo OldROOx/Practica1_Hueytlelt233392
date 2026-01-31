@@ -6,17 +6,20 @@ plugins {
 
 android {
     namespace = "com.gael.gael_practica1"
-    compileSdk = 36
+    compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.gael.gael_practica1"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     buildTypes {
         release {
@@ -36,6 +39,16 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+
+    flavorDimensions.add("environment")
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            // PASO 0: Definir la URL de la API de países
+            buildConfigField("String", "BASE_URL", "\"https://restcountries.com/v3.1/\"")
+        }
     }
 }
 
@@ -56,4 +69,10 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation(libs.retrofit.main)
+    implementation(libs.retrofit.converter.gson)
+    //coool
+
+    // Opcional: Si necesitas usar Gson por separado en tu código
+    implementation("com.google.code.gson:gson:2.11.0")
 }
