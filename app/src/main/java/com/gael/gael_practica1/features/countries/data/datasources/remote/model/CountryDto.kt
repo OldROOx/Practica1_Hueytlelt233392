@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 data class CountryDto(
     val name: NameDto,
     val cca2: String,
-    val capital: List<String>?, // Agregado el ?
+    val capital: List<String>?,
     val region: String,
-    val idd: IddDto?, // Agregado el ?
-    val currencies: Map<String, CurrencyDto>?, // Agregado el ?
-    val languages: Map<String, String>? // Agregado el ?
+    val idd: IddDto?,
+    val currencies: Map<String, CurrencyDto>?,
+    val languages: Map<String, String>?
 )
 
 data class NameDto(

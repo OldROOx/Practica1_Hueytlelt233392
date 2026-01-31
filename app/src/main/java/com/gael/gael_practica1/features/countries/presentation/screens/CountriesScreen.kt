@@ -21,7 +21,7 @@ fun CountriesScreen(
             TopAppBar(
                 title = {
                     Text(
-                        "Mundo de Países",
+                        "COUNTRinfo",
                         style = MaterialTheme.typography.headlineMedium
                     )
                 }

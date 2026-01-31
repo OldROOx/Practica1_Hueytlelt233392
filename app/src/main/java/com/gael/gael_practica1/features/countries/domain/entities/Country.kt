@@ -2,12 +2,12 @@ package com.gael.gael_practica1.features.countries.domain.entities
 
 data class Country(
     val commonName: String,
-    val officialName: String, // Este será tu "fullname"
+    val officialName: String,
     val capital: String,
     val region: String,
-    val phoneCode: String,    // Combinación de idd.root + idd.suffixes
-    val currencyName: String, // Ejemplo: "Euro"
-    val currencySymbol: String, // Ejemplo: "€"
-    val language: String,     // Idioma principal
-    val flagUrl: String       // Construida con flagsapi.com y el cca2
+    val phoneCode: String,    // codigo numerico
+    val currencyName: String,
+    val currencySymbol: String,
+    val language: String,
+    val flagUrl: String
 )

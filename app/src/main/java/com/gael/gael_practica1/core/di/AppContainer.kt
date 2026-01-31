@@ -16,7 +16,6 @@ class AppContainer {
         retrofit.create(CountriesApi::class.java)
     }
 
-    // CENTRALIZAMOS el acceso a las dependencias de países aquí
     val countriesModule: CountriesModule by lazy {
         CountriesModule(countriesApi)
     }

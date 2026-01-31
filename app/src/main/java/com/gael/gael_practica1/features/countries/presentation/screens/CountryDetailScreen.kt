@@ -34,7 +34,8 @@ fun CountryDetailScreen(country: Country, onBack: () -> Unit) {
                 .padding(padding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp)
+                .padding(20.dp)
+
         ) {
             Card(elevation = CardDefaults.cardElevation(8.dp)) {
                 AsyncImage(

@@ -10,11 +10,10 @@ class CountriesRepositoryImpl(
 ) : CountriesRepository {
 
     override suspend fun getCountries(): List<Country> {
-        // 1. Pedimos los datos a la API (devuelve List<CountryDto>)
+
         val response = countriesApi.getAllCountries()
 
-        // 2. Usamos el Mapper para transformar cada DTO en una entidad de Dominio
-        // El .map { it.toDomain() } es lo que conecta el Paso 1 con el Paso 2
+
         return response.map { it.toDomain() }
     }
 }

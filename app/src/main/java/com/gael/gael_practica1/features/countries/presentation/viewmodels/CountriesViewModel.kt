@@ -17,11 +17,11 @@ class CountriesViewModel(
     var countriesUiState: CountriesUiState by mutableStateOf(CountriesUiState.Loading)
         private set
 
-    // Estado para el texto del buscador
+
     var searchQuery by mutableStateOf("")
         private set
 
-    // Lista filtrada en tiempo real
+
     val filteredCountries: List<Country>
         get() {
             val currentState = countriesUiState

@@ -22,16 +22,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 1. Habilitar diseño de borde a borde para Material 3
+        // 1. Habilitar diseño de borde a borde para aprovechar toda la pantalla
         enableEdgeToEdge()
 
+        // Inicialización del contenedor de dependencias
         val appContainer = AppContainer()
         val getCountriesUseCase = appContainer.countriesModule.getCountriesUseCase
 
         setContent {
-            // 2. Envolver TODA la app en tu tema personalizado
+            // 2. Envolver la app en tu tema personalizado con ADLaM Display
             Gael_practica1Theme {
-                // 3. Surface es vital para que el fondo use tus colores de Material Builder
+                // 3. Surface aplica automáticamente el fondo backgroundLight (0xFFF4FBFA)
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
                         factory = CountriesViewModelFactory(getCountriesUseCase)
                     )
 
+                    // Lógica de navegación simple por estado
                     var selectedCountry by remember { mutableStateOf<Country?>(null) }
 
                     if (selectedCountry == null) {

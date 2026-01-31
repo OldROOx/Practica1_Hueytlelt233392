@@ -43,7 +43,7 @@ fun CountryCard(
                 )
                 Text(
                     text = "Capital: ${country.capital}",
-                    // APLICAMOS LA FUENTE ADLaM EN CUERPO
+
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
