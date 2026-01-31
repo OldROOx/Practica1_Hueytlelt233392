@@ -80,4 +80,5 @@ dependencies {
     // Opcional: Si necesitas usar Gson por separado en tu código
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.0")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.x")
 }
