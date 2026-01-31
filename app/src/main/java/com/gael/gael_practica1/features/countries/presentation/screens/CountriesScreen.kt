@@ -3,14 +3,10 @@ package com.gael.gael_practica1.features.countries.presentation.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.gael.gael_practica1.features.countries.domain.entities.Country
 import com.gael.gael_practica1.features.countries.presentation.components.CountryCard
 import com.gael.gael_practica1.features.countries.presentation.viewmodels.CountriesViewModel
 
@@ -18,49 +14,35 @@ import com.gael.gael_practica1.features.countries.presentation.viewmodels.Countr
 @Composable
 fun CountriesScreen(
     viewModel: CountriesViewModel,
-    onCountryClick: (Country) -> Unit
+    onCountryClick: (com.gael.gael_practica1.features.countries.domain.entities.Country) -> Unit
 ) {
-    val state = viewModel.countriesUiState
-
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(title = { Text("Mundo de Países") })
+            TopAppBar(
+                title = {
+                    Text(
+                        "Mundo de Países",
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                }
+            )
         }
     ) { padding ->
-        Column(modifier = Modifier.padding(padding).fillMaxSize()) {
+        Column(modifier = Modifier.padding(padding)) {
             OutlinedTextField(
                 value = viewModel.searchQuery,
                 onValueChange = { viewModel.onSearchQueryChange(it) },
-                label = { Text("Buscar por nombre, capital o código...") },
+                label = { Text("Buscar...", style = MaterialTheme.typography.labelLarge) },
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-                singleLine = true,
-                shape = MaterialTheme.shapes.medium // Usa las formas de M3
+                textStyle = MaterialTheme.typography.bodyLarge
             )
 
-            when (state) {
-                is CountriesUiState.Loading -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator()
-                    }
-                }
-                is CountriesUiState.Success -> {
-                    LazyColumn(
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        items(viewModel.filteredCountries) { country ->
-                            CountryCard(
-                                country = country,
-                                onClick = { onCountryClick(country) }
-                            )
-                        }
-                    }
-                }
-                is CountriesUiState.Error -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("Error al cargar datos. Verifica tu conexión.")
-                    }
+            LazyColumn {
+                items(viewModel.filteredCountries) { country ->
+                    CountryCard(
+                        country = country,
+                        onClick = { onCountryClick(country) }
+                    )
                 }
             }
         }

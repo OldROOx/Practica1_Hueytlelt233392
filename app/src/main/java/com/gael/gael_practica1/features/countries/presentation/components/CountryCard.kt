@@ -13,15 +13,16 @@ import com.gael.gael_practica1.features.countries.domain.entities.Country
 @Composable
 fun CountryCard(
     country: Country,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit // Nuevo parámetro
+    onClick: () -> Unit
 ) {
     Card(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { onClick() }, // Habilitamos el click
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -30,16 +31,21 @@ fun CountryCard(
             AsyncImage(
                 model = country.flagUrl,
                 contentDescription = "Flag of ${country.commonName}",
-                modifier = Modifier.size(64.dp)
+                modifier = Modifier.size(60.dp)
             )
-
             Spacer(modifier = Modifier.width(16.dp))
-
             Column {
-                Text(text = country.commonName, style = MaterialTheme.typography.titleLarge)
-                Text(text = "Capital: ${country.capital}", style = MaterialTheme.typography.bodyMedium)
-                Text(text = "Moneda: ${country.currencyName} (${country.currencySymbol})", style = MaterialTheme.typography.bodySmall)
-                Text(text = "Tel: ${country.phoneCode}", style = MaterialTheme.typography.bodySmall)
+                Text(
+                    text = country.commonName,
+                    // APLICAMOS LA FUENTE ADLaM
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "Capital: ${country.capital}",
+                    // APLICAMOS LA FUENTE ADLaM EN CUERPO
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }
