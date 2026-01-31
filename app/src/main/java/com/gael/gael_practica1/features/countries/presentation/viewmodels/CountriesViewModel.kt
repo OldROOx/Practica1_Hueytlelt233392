@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gael.gael_practica1.features.countries.domain.entities.Country
 import com.gael.gael_practica1.features.countries.domain.usecases.GetCountriesUseCase
 import com.gael.gael_practica1.features.countries.presentation.screens.CountriesUiState
 import kotlinx.coroutines.launch
@@ -13,9 +14,29 @@ class CountriesViewModel(
     private val getCountriesUseCase: GetCountriesUseCase
 ) : ViewModel() {
 
-    // El estado que la UI observará
     var countriesUiState: CountriesUiState by mutableStateOf(CountriesUiState.Loading)
         private set
+
+    // Estado para el texto del buscador
+    var searchQuery by mutableStateOf("")
+        private set
+
+    // Lista filtrada en tiempo real
+    val filteredCountries: List<Country>
+        get() {
+            val currentState = countriesUiState
+            return if (currentState is CountriesUiState.Success) {
+                if (searchQuery.isEmpty()) {
+                    currentState.countries
+                } else {
+                    currentState.countries.filter { country ->
+                        country.commonName.contains(searchQuery, ignoreCase = true) ||
+                                country.capital.contains(searchQuery, ignoreCase = true) ||
+                                country.phoneCode.contains(searchQuery)
+                    }
+                }
+            } else emptyList()
+        }
 
     init {
         getCountries()
@@ -25,12 +46,15 @@ class CountriesViewModel(
         viewModelScope.launch {
             countriesUiState = CountriesUiState.Loading
             countriesUiState = try {
-                // Llamamos al caso de uso (Paso 3)
                 val list = getCountriesUseCase()
                 CountriesUiState.Success(list)
             } catch (e: Exception) {
                 CountriesUiState.Error
             }
         }
+    }
+
+    fun onSearchQueryChange(newQuery: String) {
+        searchQuery = newQuery
     }
 }
