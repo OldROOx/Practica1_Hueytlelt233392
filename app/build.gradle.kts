@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -31,8 +34,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -47,12 +50,14 @@ android {
         create("dev") {
             dimension = "environment"
             // PASO 0: Definir la URL de la API de países
+            // PASO 0: Definir la URL de la API de países
             buildConfigField("String", "BASE_URL", "\"https://restcountries.com/v3.1/\"")
         }
     }
 }
 
 dependencies {
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -75,10 +80,21 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
 
     // Para el error de 'coil' y 'AsyncImage' en CountryCard
+
+    // Para el error de 'coil' y 'AsyncImage' en CountryCard
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // Opcional: Si necesitas usar Gson por separado en tu código
 
     // Opcional: Si necesitas usar Gson por separado en tu código
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.0")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.x")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.x")
+
+    implementation("com.google.dagger:hilt-android:2.57.1")
+
+    implementation("com.google.dagger:hilt-android:2.57.1")
+    ksp("com.google.dagger:hilt-compiler:2.57.1")
+
 }
