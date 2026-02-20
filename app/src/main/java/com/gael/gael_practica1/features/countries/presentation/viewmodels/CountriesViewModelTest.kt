@@ -20,15 +20,17 @@ class CountriesViewModelTest {
 
     @Before
     fun setup() {
+        // Configura el despachador de pruebas para corrutinas
         Dispatchers.setMain(UnconfinedTestDispatcher())
         getCountriesUseCase = mock(GetCountriesUseCase::class.java)
     }
 
     @Test
-    fun `cuando getCountries inicia el estado es Loading y luego Success`() = runTest {
+    fun `verificar que el estado cambie a Success tras cargar datos`() = runTest {
         `when`(getCountriesUseCase()).thenReturn(emptyList())
         val viewModel = CountriesViewModel(getCountriesUseCase)
-        // Debido al UnconfinedTestDispatcher, el init se ejecuta inmediatamente
+
+        // El estado debería ser Success al inicializarse correctamente con el mock
         assertTrue(viewModel.countriesUiState is CountriesUiState.Success)
     }
 }

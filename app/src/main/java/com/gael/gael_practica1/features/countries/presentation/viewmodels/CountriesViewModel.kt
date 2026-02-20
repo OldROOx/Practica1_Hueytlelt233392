@@ -9,10 +9,10 @@ import com.gael.gael_practica1.features.countries.domain.entities.Country
 import com.gael.gael_practica1.features.countries.domain.usecases.GetCountriesUseCase
 import com.gael.gael_practica1.features.countries.presentation.screens.CountriesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import javax.inject.Inject // CAMBIO: Usar javax.inject.Inject
 import kotlinx.coroutines.launch
 
-@HiltViewModel
+@HiltViewModel // AGREGAR: Necesario para Hilt
 class CountriesViewModel @Inject constructor(
     private val getCountriesUseCase: GetCountriesUseCase
 ) : ViewModel() {
