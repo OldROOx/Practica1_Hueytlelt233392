@@ -3,20 +3,14 @@ package com.gael.gael_practica1
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.gael.gael_practica1.core.di.AppContainer
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.gael.gael_practica1.features.countries.domain.entities.Country
 import com.gael.gael_practica1.features.countries.presentation.screens.CountriesScreen
 import com.gael.gael_practica1.features.countries.presentation.screens.CountryDetailScreen
 import com.gael.gael_practica1.features.countries.presentation.viewmodels.CountriesViewModel
-import com.gael.gael_practica1.features.countries.presentation.viewmodels.CountriesViewModelFactory
 import com.gael.gael_practica1.ui.theme.Gael_practica1Theme
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -24,7 +18,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Gael_practica1Theme {
-                CountriesScreen() // Hilt inyectará el ViewModel aquí
+                val viewModel: CountriesViewModel = hiltViewModel()
+                var selectedCountry by remember { mutableStateOf<Country?>(null) }
+
+                if (selectedCountry == null) {
+                    CountriesScreen(
+                        viewModel = viewModel,
+                        onCountryClick = { selectedCountry = it }
+                    )
+                } else {
+                    CountryDetailScreen(
+                        country = selectedCountry!!,
+                        onBack = { selectedCountry = null }
+                    )
+                }
             }
         }
     }

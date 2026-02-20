@@ -10,8 +10,8 @@ import kotlinx.coroutines.test.setMain
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CountriesViewModelTest {
@@ -20,17 +20,15 @@ class CountriesViewModelTest {
 
     @Before
     fun setup() {
-        // Configura el despachador de pruebas para corrutinas
         Dispatchers.setMain(UnconfinedTestDispatcher())
-        getCountriesUseCase = mock(GetCountriesUseCase::class.java)
+        getCountriesUseCase = mock()
     }
 
     @Test
     fun `verificar que el estado cambie a Success tras cargar datos`() = runTest {
-        `when`(getCountriesUseCase()).thenReturn(emptyList())
+        whenever(getCountriesUseCase()).thenReturn(emptyList())
         val viewModel = CountriesViewModel(getCountriesUseCase)
 
-        // El estado debería ser Success al inicializarse correctamente con el mock
         assertTrue(viewModel.countriesUiState is CountriesUiState.Success)
     }
 }
