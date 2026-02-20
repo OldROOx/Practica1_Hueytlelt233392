@@ -8,9 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.gael.gael_practica1.features.countries.domain.entities.Country
 import com.gael.gael_practica1.features.countries.domain.usecases.GetCountriesUseCase
 import com.gael.gael_practica1.features.countries.presentation.screens.CountriesUiState
+import jakarta.inject.Inject
 import kotlinx.coroutines.launch
 
-class CountriesViewModel(
+class CountriesViewModel @Inject constructor(
     private val getCountriesUseCase: GetCountriesUseCase
 ) : ViewModel() {
 

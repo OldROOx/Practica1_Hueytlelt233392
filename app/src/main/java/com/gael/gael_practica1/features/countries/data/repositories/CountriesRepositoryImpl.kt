@@ -4,8 +4,9 @@ import com.gael.gael_practica1.core.network.CountriesApi
 import com.gael.gael_practica1.features.countries.data.datasources.remote.mapper.toDomain
 import com.gael.gael_practica1.features.countries.domain.entities.Country
 import com.gael.gael_practica1.features.countries.domain.repositories.CountriesRepository
+import jakarta.inject.Inject
 
-class CountriesRepositoryImpl(
+class CountriesRepositoryImpl @Inject constructor(
     private val countriesApi: CountriesApi
 ) : CountriesRepository {
 
