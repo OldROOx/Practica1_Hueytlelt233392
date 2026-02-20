@@ -25,9 +25,10 @@ class CountriesViewModelTest {
     }
 
     @Test
-    fun `verificar que el estado inicial sea Loading y luego Success`() = runTest {
+    fun `cuando getCountries inicia el estado es Loading y luego Success`() = runTest {
         `when`(getCountriesUseCase()).thenReturn(emptyList())
         val viewModel = CountriesViewModel(getCountriesUseCase)
+        // Debido al UnconfinedTestDispatcher, el init se ejecuta inmediatamente
         assertTrue(viewModel.countriesUiState is CountriesUiState.Success)
     }
 }

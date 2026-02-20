@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.gael.gael_practica1.features.countries.domain.entities.Country
 import com.gael.gael_practica1.features.countries.domain.usecases.GetCountriesUseCase
 import com.gael.gael_practica1.features.countries.presentation.screens.CountriesUiState
-import jakarta.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class CountriesViewModel @Inject constructor(
     private val getCountriesUseCase: GetCountriesUseCase
 ) : ViewModel() {
@@ -18,10 +20,8 @@ class CountriesViewModel @Inject constructor(
     var countriesUiState: CountriesUiState by mutableStateOf(CountriesUiState.Loading)
         private set
 
-
     var searchQuery by mutableStateOf("")
         private set
-
 
     val filteredCountries: List<Country>
         get() {

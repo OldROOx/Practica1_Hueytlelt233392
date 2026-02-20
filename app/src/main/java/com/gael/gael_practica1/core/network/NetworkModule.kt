@@ -1,7 +1,6 @@
-package com.gael.gael_practica1.core.di
+package com.gael.gael_practica1.core.network
 
 import com.gael.gael_practica1.BuildConfig
-import com.gael.gael_practica1.core.network.CountriesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

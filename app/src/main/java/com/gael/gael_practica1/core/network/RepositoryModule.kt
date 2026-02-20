@@ -1,4 +1,4 @@
-package com.gael.gael_practica1.core.di
+package com.gael.gael_practica1.core.network
 
 import com.gael.gael_practica1.features.countries.data.repositories.CountriesRepositoryImpl
 import com.gael.gael_practica1.features.countries.domain.repositories.CountriesRepository
